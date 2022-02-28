@@ -142,6 +142,7 @@ legend("topright", col=c("black","red","blue")
 plot(powerDT[, dateTime], powerDT[,Global_reactive_power], type="l", xlab="datetime", ylab="Global_reactive_power")
 
 dev.off()
+
 ![image](https://user-images.githubusercontent.com/39666878/155973136-dd0e1b63-7a6f-49ad-b177-e5481f99fe40.png)
 
 
