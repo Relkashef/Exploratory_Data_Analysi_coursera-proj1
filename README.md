@@ -2,32 +2,39 @@
 This assignment uses data from the UC Irvine Machine Learning Repository, a popular repository for machine learning datasets. In particular, we will be using the “Individual household electric power consumption Data Set” 
 
 library("data.table")
+getwd()
+setwd("C:/Users/RElkashef/Python/@Code tr/R-courses-master")
 
-setwd("~/Desktop/datasciencecoursera/4_Exploratory_Data_Analysis/project/data")
 
 #Reads in data from file then subsets data for specified dates
 powerDT <- data.table::fread(input = "household_power_consumption.txt"
                              , na.strings="?"
-                             )
+)
+head(powerDT)
 
 # Prevents histogram from printing in scientific notation
 powerDT[, Global_active_power := lapply(.SD, as.numeric), .SDcols = c("Global_active_power")]
 
 # Change Date Column to Date Type
 powerDT[, Date := lapply(.SD, as.Date, "%d/%m/%Y"), .SDcols = c("Date")]
-
+head(powerDT)
 # Filter Dates for 2007-02-01 and 2007-02-02
 powerDT <- powerDT[(Date >= "2007-02-01") & (Date <= "2007-02-02")]
+
+head(powerDT)
 
 png("plot1.png", width=480, height=480)
 
 ## Plot 1
-hist(powerDT[, Global_active_power], main="Global Active Power", 
+hist(powerDT[,Global_active_power], main="Global Active Power", 
      xlab="Global Active Power (kilowatts)", ylab="Frequency", col="Red")
 
+dev.cur()
 dev.off()
 
-![image](https://user-images.githubusercontent.com/39666878/155972930-52f84e4f-585e-4109-889a-91dc0039f580.png)
+![plot1](https://user-images.githubusercontent.com/39666878/155974688-dc34a5c1-921c-47b5-acd6-5a543f801dc3.png)
+
+
 
 library("data.table")
 
@@ -53,7 +60,7 @@ png("plot2.png", width=480, height=480)
 plot(x = powerDT[, dateTime]
      , y = powerDT[, Global_active_power]
      , type="l", xlab="", ylab="Global Active Power (kilowatts)")
-
+dev.cur()
 dev.off()
 
 ![image](https://user-images.githubusercontent.com/39666878/155973045-88ac6852-c1cc-4014-aed5-e304dc7e47d2.png)
